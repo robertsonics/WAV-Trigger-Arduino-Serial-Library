@@ -1,0 +1,2 @@
+wavTrigger	KEYWORD1
+
