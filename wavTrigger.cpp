@@ -73,6 +73,19 @@ byte txbuf[8];
 }
 
 // **************************************************************
+void wavTrigger::stopAllTracks(void) {
+
+byte txbuf[5];
+
+  txbuf[0] = 0xf0;
+  txbuf[1] = 0xaa;
+  txbuf[2] = 0x05;
+  txbuf[3] = CMD_STOP_ALL;
+  txbuf[4] = 0x55;
+  WTSerial.write(txbuf, 5);
+}
+
+// **************************************************************
 void wavTrigger::trackGain(int trk, int gain) {
 
 byte txbuf[9];

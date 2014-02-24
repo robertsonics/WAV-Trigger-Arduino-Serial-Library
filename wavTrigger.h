@@ -22,6 +22,7 @@
 #define WAVTRIGGER_H
 
 #define CMD_TRACK_CONTROL	3
+#define CMD_STOP_ALL		4
 #define CMD_TRACK_VOLUME	8
 
 #define TRK_PLAY_SOLO	0
@@ -40,6 +41,7 @@ public:
 	wavTrigger() {;}
 	~wavTrigger() {;}
 	void start(void);
+	void stopAllTracks(void);
 	void trackPlaySolo(int trk);
 	void trackPlayPoly(int trk);
 	void trackStop(int trk);
