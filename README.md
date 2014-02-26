@@ -53,17 +53,18 @@ wTrig.trackPause(int t) - this function pauses track number t if it's currently
 wTrig.trackResume(int t) - this function resumes track number t if it's currently
   paused. If track number t is not paused, this function does nothing.
   
-wTrig.trackLoop(int t, bool enable) - this function enables (enable = true) or
-  disables (enable = false) the loop flag for track t. If a track's loop flag is
-  set, that track will loop continuously until it's stopped, in which case it
-  will stop immediately but the loop flag will remain set, or until the loop flag
-  is cleared, in which case it will stop when it reaches the end of the track.
+wTrig.trackLoop(int t, bool enable) - this function enables (true) or disables
+  (false) the loop flag for track t. This command does not actually start a track,
+  only determines how it behaves once it is playing and reaches the end. If the
+  loop flag is set, that track will loop continuously until it's stopped, in which
+  case it will stop immediately but the loop flag will remain set, or until the loop
+  flag is cleared, in which case it will stop when it reaches the end of the track.
   This command may be used either before a track is started or while it's playing.
   
 wTrig.trackGain(int t, int gain) - this function immediately sets the gain of
   track t to the specified value. The range for gain is -70 to +10. A value of
-  0 (no gain) plays the track at whatever level is in the wav file. This is the
-  default gain for every track until it is changed. A value of -70 is completely
+  0 (no gain) plays the track at the nominal value in the wav file. This is the
+  default gain for every track until changed. A value of -70 is completely
   muted. If the track is playing, you will hear the result immediately. If the
   track is not playing, the gain will be used the next time the track is started.
   Every track can have its own gain.
@@ -73,8 +74,8 @@ wTrig.trackGain(int t, int gain) - this function immediately sets the gain of
   intervals. Increment or decrementing by 1 every 20 to 50 msecs produces nice
   smooth fades.
   
-wTrig.stopAllTracks(void) - this commands stops any and all tracks that are
-  currently playing.
+wTrig.stopAllTracks() - this commands stops any and all tracks that are currently
+  playing.
   
   
 
