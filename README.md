@@ -30,13 +30,13 @@ In all cases below, the range for t (track number) is 1 through 999;
 
 wavTrigger wTtrig;
 
-wTrig.start() - you must call this method first to initialize the serial
+**wTrig.start()** - you must call this method first to initialize the serial
   communications.
 
-wTrig.trackPlaySolo(int t) - this function stops any and all tracks that are
-  currently playing and starts track number t from the beginning.
+**wTrig.trackPlaySolo(int t)** - this function stops any and all tracks that are
+  currently playing and starts track number *t* from the beginning.
 
-wTrig.trackPlayPoly(int t) - this function starts track number t from the
+**wTrig.trackPlayPoly(int t)** - this function starts track number *t* from the
   beginning, blending it with any other tracks that are currently playing,
   including potentially another copy of the same track.
   
