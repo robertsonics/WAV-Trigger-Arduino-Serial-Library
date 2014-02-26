@@ -34,35 +34,35 @@ wavTrigger wTtrig;
   communications.
 
 **wTrig.trackPlaySolo(int t)** - this function stops any and all tracks that are
-  currently playing and starts track number *t* from the beginning.
+  currently playing and starts track number **t** from the beginning.
 
-**wTrig.trackPlayPoly(int t)** - this function starts track number *t* from the
+**wTrig.trackPlayPoly(int t)** - this function starts track number **t** from the
   beginning, blending it with any other tracks that are currently playing,
   including potentially another copy of the same track.
   
-wTrig.trackStop(int t) - this function stops track number t if it's currently
+**wTrig.trackStop(int t)** - this function stops track number **t** if it's currently
   playing. If track t is not playing, this function does nothing. No other
   tracks are affected.
   
-wTrig.trackPause(int t) - this function pauses track number t if it's currently
+**wTrig.trackPause(int t)** - this function pauses track number **t** if it's currently
   playing. If track t is not playing, this function does nothing. Keep in mind
   that a paused track is still using one of the 8 voice slots. A voice allocated
   to playing a track becomes free only when that sound is stopped or the track
   reaches the end of the file (and is not looping).
   
-wTrig.trackResume(int t) - this function resumes track number t if it's currently
-  paused. If track number t is not paused, this function does nothing.
+**wTrig.trackResume(int t)** - this function resumes track number **t** if it's currently
+  paused. If track number **t** is not paused, this function does nothing.
   
-wTrig.trackLoop(int t, bool enable) - this function enables (true) or disables
-  (false) the loop flag for track t. This command does not actually start a track,
+**wTrig.trackLoop(int t, bool enable)** - this function enables (true) or disables
+  (false) the loop flag for track **t**. This command does not actually start a track,
   only determines how it behaves once it is playing and reaches the end. If the
   loop flag is set, that track will loop continuously until it's stopped, in which
   case it will stop immediately but the loop flag will remain set, or until the loop
   flag is cleared, in which case it will stop when it reaches the end of the track.
   This command may be used either before a track is started or while it's playing.
   
-wTrig.trackGain(int t, int gain) - this function immediately sets the gain of
-  track t to the specified value. The range for gain is -70 to +10. A value of
+**wTrig.trackGain(int t, int gain)** - this function immediately sets the gain of
+  track **t** to the specified value. The range for gain is -70 to +10. A value of
   0 (no gain) plays the track at the nominal value in the wav file. This is the
   default gain for every track until changed. A value of -70 is completely
   muted. If the track is playing, you will hear the result immediately. If the
@@ -74,7 +74,7 @@ wTrig.trackGain(int t, int gain) - this function immediately sets the gain of
   intervals. Increment or decrementing by 1 every 20 to 50 msecs produces nice
   smooth fades.
   
-wTrig.stopAllTracks() - this commands stops any and all tracks that are currently
+**wTrig.stopAllTracks()** - this commands stops any and all tracks that are currently
   playing.
   
   
