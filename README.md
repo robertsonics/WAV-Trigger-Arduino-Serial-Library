@@ -102,7 +102,7 @@ wavTrigger wTtrig;
 
 **wTrig.trackCrossFade(int tFrom, int tTo, int gain, int time)** - this command
   initiates a hardware crossfade from one track to another in a specified number of
-  milliseconds. The **from** track will be faded out and stopped, and the **t** track
+  milliseconds. The **From** track will be faded out and stopped, and the **To** track
   will be started and faded in to the specified volume.
  
 
