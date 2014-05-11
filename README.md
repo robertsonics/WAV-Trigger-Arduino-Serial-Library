@@ -40,6 +40,11 @@ wavTrigger wTtrig;
   beginning, blending it with any other tracks that are currently playing,
   including potentially another copy of the same track.
   
+**wTrig.trackLoad(int t)** - this function loads track number **t** and pauses it
+  at the beginning of the track. Loading muiltiple tracks and then un-pausing them
+  all with resumeAllInSync() function allow for starting multiple tracks in sample
+  sync.
+  
 **wTrig.trackStop(int t)** - this function stops track number **t** if it's currently
   playing. If track t is not playing, this function does nothing. No other
   tracks are affected.
@@ -77,6 +82,20 @@ wavTrigger wTtrig;
 **wTrig.stopAllTracks()** - this commands stops any and all tracks that are currently
   playing.
   
-  
+**wTrig.resumeAllInSync()** - this command resumes all paused tracks within the same
+  audio buffer. Any tracks that were loaded using the trackLoad() function will start
+  and remain in sample sync.
+
+**wTrig.trackFade(int t, int gain, int time, bool stopFlag)** - this command initiates
+  a hardware volume fade on the specified track if it is currently playing. The track
+  volume will transition smoothly from the current value to the target value in the
+  specified number of milliseconds. If the stopFlag is non-zero, the track will be
+  stopped at the completion of the fade (for fade-outs.)
+
+**wTrig.trackCrossFade(int tFrom, int tTo, int gain, int time)** - this command
+  initiates a hardware crossfade from one track to another in a specified number of
+  milliseconds. The "from" track will be faded out and stopped, and the "to" track
+  will be started and faded in to the specified volume.
+ 
 
   
