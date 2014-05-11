@@ -84,7 +84,8 @@ wavTrigger wTtrig;
   Because the effect is immediate, large changes can produce ubrupt results. If
   you want to fade in or fade out a track, send small changes spaced out at regular
   intervals. Increment or decrementing by 1 every 20 to 50 msecs produces nice
-  smooth fades.
+  smooth fades. Better yet, use the new trackFade() and trackCrossFade() commands
+  below.
   
 **wTrig.stopAllTracks()** - this commands stops any and all tracks that are currently
   playing.
