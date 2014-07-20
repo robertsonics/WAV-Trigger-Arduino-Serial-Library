@@ -18,6 +18,23 @@ void wavTrigger::start(void) {
 }
 
 // **************************************************************
+void wavTrigger::masterGain(int gain) {
+
+byte txbuf[8];
+unsigned short vol;
+
+  txbuf[0] = 0xf0;
+  txbuf[1] = 0xaa;
+  txbuf[2] = 0x07;
+  txbuf[3] = CMD_MASTER_VOLUME;
+  vol = (unsigned short)gain;
+  txbuf[4] = (byte)vol;
+  txbuf[5] = (byte)(vol >> 8);
+  txbuf[6] = 0x55;
+  WTSerial.write(txbuf, 7);
+}
+
+// **************************************************************
 void wavTrigger::trackPlaySolo(int trk) {
   
   trackControl(trk, TRK_PLAY_SOLO);

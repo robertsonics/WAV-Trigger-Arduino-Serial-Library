@@ -27,6 +27,7 @@
 
 #define CMD_TRACK_CONTROL	3
 #define CMD_STOP_ALL		4
+#define CMD_MASTER_VOLUME	5
 #define CMD_TRACK_VOLUME	8
 #define CMD_TRACK_FADE		10
 #define CMD_RESUME_ALL_SYNC	11
@@ -48,6 +49,7 @@ public:
 	wavTrigger() {;}
 	~wavTrigger() {;}
 	void start(void);
+	void masterGain(int gain);
 	void stopAllTracks(void);
 	void resumeAllInSync(void);
 	void trackPlaySolo(int trk);
