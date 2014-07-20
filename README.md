@@ -40,10 +40,10 @@ wavTrigger wTtrig;
 **wTrig.start()** - you must call this method first to initialize the serial
   communications.
 
-**wTrig.masterGain(int gain)** - this function immediately sets the gain of
-  the output stage to the specified value. The range for gain is -70 to +4. If audio
-  is playing, you will hear the result immediately. If audio is not playing, the new
-  gain will be used the next time the track is started.
+**wTrig.masterGain(int gain)** - this function immediately sets the gain of the
+  final output stage to the specified value. The range for gain is -70 to +4. If
+  audio is playing, you will hear the result immediately. If audio is not playing,
+  the new gain will be used the next time a track is started.
 
 **wTrig.trackPlaySolo(int t)** - this function stops any and all tracks that are
   currently playing and starts track number **t** from the beginning.
