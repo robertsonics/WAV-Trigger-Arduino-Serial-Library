@@ -3,12 +3,12 @@ WAV-Trigger-Arduino-Serial-Library
 
 WAV Trigger Serial Control Arduino Library
 
-This preliminary version is written as part of a demo sketch for controlling
-the WAV Trigger from an Arduino YUN via a browser interface over wifi. It uses
-the AltSoftwareSerial library from PJRC for compatibility with the YUN. For
-the time being, if you want to use a hardware serial port, or the native
-Arduino SoftwareSerial class, it's easy enough to change. I'll eventually make
-this, as well as the baudrate, configurable through the class itself.
+This version of the library uses the AltSoftwareSerial library from PJRC, so
+you will need to download and install that library as well. Be sure to include
+both library headers at the top of your sketch:
+
+#include <AltSoftSerial.h>
+#include <wavTrigger.h>
 
 This version currently only sends commands TO the WAV Trigger. I've not yet
 implemented any functions to receive info FROM the WAV Trigger.
@@ -28,6 +28,10 @@ functions are supported, allowing you to achieve smooth volume ramps (up or down
 and crossfades with a single serial command. Also beginning with v.080 and higher
 it is possible to pre-load multiple tracks and issue a single resume message that
 allows them start and play in sample locked synchronization.
+
+The library now includes an example sketch for the Arduino Uno that demonstrates
+many of the library commands with a set of demo tracks which you can downlod from
+the WAV Trigger download page at www.robertsonics.com.
 
 
 Usage:
