@@ -5,10 +5,8 @@ WAV Trigger Serial Control Arduino Library
 
 This version of the library uses the AltSoftwareSerial library from PJRC, so
 you will need to download and install that library as well. Be sure to include
-both library headers at the top of your sketch:
-
-"#include <AltSoftSerial.h>"
-"#include <wavTrigger.h>"
+both library headers at the top of your sketch. Check out the inlcuded example
+sketch to see how to do this.
 
 This version currently only sends commands TO the WAV Trigger. I've not yet
 implemented any functions to receive info FROM the WAV Trigger.
@@ -30,8 +28,8 @@ it is possible to pre-load multiple tracks and issue a single resume message tha
 allows them start and play in sample locked synchronization.
 
 The library now includes an example sketch for the Arduino Uno that demonstrates
-many of the library commands with a set of demo tracks which you can downlod from
-the WAV Trigger download page at www.robertsonics.com.
+many of the library commands with a set of demo tracks which you can download from
+www.robertsonics.com.
 
 
 Usage:
