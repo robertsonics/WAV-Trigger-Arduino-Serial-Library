@@ -20,10 +20,23 @@
 //
 // 05/10/14  Tested with UNO. Added new functions for fades, cross-
 //           fades and starting multiple tracks in sample sync.
-
+//
+// 04/26/15  Added support for sample-rate / pitch bend control,
+//           and compile macro switches for hardware serial ports.
+//
 
 #ifndef WAVTRIGGER_H
 #define WAVTRIGGER_H
+
+// ==================================================================
+// The following defines are used to control which serial class is
+//  used. Uncomment only the one you wish to use. If all of them are
+//  commented out, the library will use Hardware Serial
+#define __WT_USE_ALTSOFTSERIAL__
+//#define __WT_USE_SERIAL1__
+//#define __WT_USE_SERIAL2__
+//#define __WT_USE_SERIAL3__
+// ==================================================================
 
 #define CMD_TRACK_CONTROL		3
 #define CMD_STOP_ALL			4
@@ -42,7 +55,26 @@
 #define TRK_LOOP_OFF	6
 #define TRK_LOAD		7
 
+#ifdef __WT_USE_ALTSOFTSERIAL__
 #include "../AltSoftSerial/AltSoftSerial.h"
+#else
+#include <HardwareSerial.h>
+#ifdef __WT_USE_SERIAL1__
+#define WTSerial Serial1
+#define __WT_SERIAL_ASSIGNED__
+#endif
+#ifdef __WT_USE_SERIAL2__
+#define WTSerial Serial2
+#define __WT_SERIAL_ASSIGNED__
+#endif
+#ifdef __WT_USE_SERIAL3__
+#define WTSerial Serial3
+#define __WT_SERIAL_ASSIGNED__
+#endif
+#ifndef __WT_SERIAL_ASSIGNED__
+#define WTSerial Serial
+#endif
+#endif
 
 class wavTrigger
 {
@@ -67,7 +99,10 @@ public:
 private:
 	void trackControl(int trk, int code);
 
+#ifdef __WT_USE_ALTSOFTSERIAL__
 	AltSoftSerial WTSerial;
+#endif
+
 };
 
 #endif
