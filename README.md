@@ -12,7 +12,7 @@ to include both library headers at the top of your sketch.
 #include <wavTrigger.h>
 ```
 
-If you want to use hardware serial ports instead, you'll need to make one small
+If you want to use a hardware serial port instead, you'll need to make one small
 change to the library's **wavTrigger.h file**. Near the top of the file, look for:
 
 ```
@@ -27,7 +27,7 @@ change to the library's **wavTrigger.h file**. Near the top of the file, look fo
 // ==================================================================
 ```
 
-Comment out the __WT_USER_ALTSOFTSERIAL__ line and uncomment the line correspond-
+Comment out the `__WT_USER_ALTSOFTSERIAL__` line and uncomment the line correspond-
 ing to the hardware port you want to use. If all the lines are commented out, the
 library will use Serial (the only hardware serial port on an Uno.)
 
