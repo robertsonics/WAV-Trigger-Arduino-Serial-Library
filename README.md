@@ -5,8 +5,12 @@ WAV Trigger Serial Control Arduino Library
 
 This version of the library uses the AltSoftwareSerial library from PJRC, so
 you will need to download and install that library as well. Be sure to include
-both library headers at the top of your sketch. Check out the inlcuded example
-sketch to see how to do this.
+both library headers at the top of your sketch.
+
+```
+#include <AltSoftSerial.h>
+#include <wavTrigger.h>
+```
 
 This version currently only sends commands TO the WAV Trigger. I've not yet
 implemented any functions to receive info FROM the WAV Trigger.
