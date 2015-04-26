@@ -54,8 +54,8 @@ wavTrigger wTtrig;
 **wTrig.samplerateOffset(int offset)** - this function immediately sets sample-
   rate offset, or playback speed / pitch, of the main output mix. The range for
   for the offset is -32767 to +32676, giving a speed range of 1/2x to 2x, or a
-  picth range of down one ocatave to up one octave. If audio is playing, you will
-  hear the result immediately. If audio is not playing, the new samplerate offset
+  pitch range of down one octave to up one octave. If audio is playing, you will
+  hear the result immediately. If audio is not playing, the new sample-rate offset
   will be used the next time a track is started.
 
 **wTrig.trackPlaySolo(int t)** - this function stops any and all tracks that are
