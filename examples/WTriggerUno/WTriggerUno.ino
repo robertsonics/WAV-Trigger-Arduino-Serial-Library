@@ -33,9 +33,9 @@
 //    not make as much sense. If you do, make sure your tracks are at least 10
 //    to 20 seconds long and have no silence at the start of the file.
 
-#include "Metro.h"
-#include "AltSoftSerial.h"    // Arduino build environment requires this
-#include "wavTrigger.h"
+#include <Metro.h>
+#include <AltSoftSerial.h>    // Arduino build environment requires this
+#include <wavTrigger.h>
 
 #define LED 13                // our LED
 
@@ -46,6 +46,7 @@ Metro gWTrigMetro(6000);      // WAV Trigger state machine interval timer
 
 byte gLedState = 0;           // LED State
 int  gWTrigState = 0;         // WAV Trigger state
+int  gRateOffset = 0;         // WAV Trigger sample-rate offset
 
 
 // ****************************************************************************
@@ -75,10 +76,12 @@ void setup() {
 
 // ****************************************************************************
 // This program uses a Metro timer to create a state machine that steps
-//  through states at 8 second intervals - you can change this rate above.
+//  through states at 6 second intervals - you can change this rate above.
 //  Each state will execute a new wavTrigger command.
 
-void loop() {  
+void loop() {
+  
+int i;
 
   // If time to do so, perform the next WAV Trigger task and then increment
   //  the state machine variable 
@@ -96,7 +99,7 @@ void loop() {
 
           // Demonstrates how to cross-fade music tracks
           case 1:
-              wTrig.trackCrossFade(2, 1, 0, 2000);  // Cross-fade Track 2 to Track 1
+              wTrig.trackCrossFade(2, 1, 0, 3000);  // Cross-fade Track 2 to Track 1
           break;
                                  
           // Fade down music and start looping dialog
@@ -123,31 +126,48 @@ void loop() {
               wTrig.trackFade(4, -50, 5000, 1);     // Fade Track 4 to -50dB and stop
           break;
           
-          // This demonstrates playing musical instrument samples, as well as pre-loading
-          //  multiple tracks and then starting them in sample sync.
+          // This demonstrates playing musical instrument samples, with decay on
+          //  release
           case 5:
               wTrig.masterGain(-8);                 // Lower main volume
               wTrig.trackPlayPoly(6);               // Play first note
-              delay(500);
+              delay(1000);
               wTrig.trackPlayPoly(7);               // Play second note
-              delay(500);
+              delay(1000);
               wTrig.trackPlayPoly(8);               // Play third note
-              delay(500);
-              wTrig.stopAllTracks();                // Stop all
-              delay(500);
+              delay(1000);
+              wTrig.trackFade(6, -50, 5000, 1);     // Fade Track 6 to -50dB and stop
+              wTrig.trackFade(7, -50, 5000, 1);     // Fade Track 7 to -50dB and stop
+              wTrig.trackFade(8, -50, 5000, 1);     // Fade Track 8 to -50dB and stop
+          break;
+   
+          // Demonstrates preloading tracks and starting them in sample-sync, and
+          //  real-time samplerate control (pitch bending);
+          case 6:
               wTrig.trackLoad(6);                   // Load and pause Track 6
               wTrig.trackLoad(7);                   // Load and pause Track 7
               wTrig.trackLoad(8);                   // Load and pause Track 8
               wTrig.resumeAllInSync();              // Start all in sample sync
-              delay(3000);
-              wTrig.stopAllTracks();                // Stop ll
-          break;        
+              for (i = 0; i < 100; i++) {
+                gRateOffset -= 200;
+                wTrig.samplerateOffset(gRateOffset);
+                delay(10);
+              }
+              for (i = 0; i < 100; i++) {
+                gRateOffset += 200;
+                wTrig.samplerateOffset(gRateOffset);
+                delay(10);
+              }
+              delay(500);
+              wTrig.stopAllTracks();                // Stop all
+         break;
+         
            
       } // switch
  
       // Increment our state
       gWTrigState++;
-      if (gWTrigState > 5)
+      if (gWTrigState > 6)
           gWTrigState = 0;
           
   } // if (gWTrigState.check() == 1)
