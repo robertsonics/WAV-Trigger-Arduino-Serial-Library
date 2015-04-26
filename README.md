@@ -3,14 +3,33 @@ WAV-Trigger-Arduino-Serial-Library
 
 WAV Trigger Serial Control Arduino Library
 
-This version of the library uses the AltSoftwareSerial library from PJRC, so
-you will need to download and install that library as well. Be sure to include
-both library headers at the top of your sketch.
+This version of the library uses the AltSoftwareSerial library from PJRC by
+default, so you'll need to download and install that library as well. Be sure
+to include both library headers at the top of your sketch.
 
 ```
 #include <AltSoftSerial.h>
 #include <wavTrigger.h>
 ```
+
+If you want to use hardware serial ports instead, you'll need to make one small
+change to the library's **wavTrigger.h file**. Near the top of the file, look for:
+
+```
+// ==================================================================
+// The following defines are used to control which serial class is
+//  used. Uncomment only the one you wish to use. If all of them are
+//  commented out, the library will use Hardware Serial
+#define __WT_USE_ALTSOFTSERIAL__
+//#define __WT_USE_SERIAL1__
+//#define __WT_USE_SERIAL2__
+//#define __WT_USE_SERIAL3__
+// ==================================================================
+```
+
+Comment out the __WT_USER_ALTSOFTSERIAL__ line and uncomment the line correspond-
+ing to the hardware port you want to use. If all the lines are commented out, the
+library will use Serial (the only hardware serial port on an Uno.)
 
 This version currently only sends commands TO the WAV Trigger. I've not yet
 implemented any functions to receive info FROM the WAV Trigger.
