@@ -25,12 +25,13 @@
 #ifndef WAVTRIGGER_H
 #define WAVTRIGGER_H
 
-#define CMD_TRACK_CONTROL	3
-#define CMD_STOP_ALL		4
-#define CMD_MASTER_VOLUME	5
-#define CMD_TRACK_VOLUME	8
-#define CMD_TRACK_FADE		10
-#define CMD_RESUME_ALL_SYNC	11
+#define CMD_TRACK_CONTROL		3
+#define CMD_STOP_ALL			4
+#define CMD_MASTER_VOLUME		5
+#define CMD_TRACK_VOLUME		8
+#define CMD_TRACK_FADE			10
+#define CMD_RESUME_ALL_SYNC		11
+#define CMD_SAMPLERATE_OFFSET	12	
 
 #define TRK_PLAY_SOLO	0
 #define TRK_PLAY_POLY	1
@@ -62,6 +63,7 @@ public:
 	void trackGain(int trk, int gain);
 	void trackFade(int trk, int gain, int time, bool stopFlag);
 	void trackCrossFade(int trkFrom, int trkTo, int gain, int time);
+	void samplerateOffset(int offset);
 private:
 	void trackControl(int trk, int code);
 

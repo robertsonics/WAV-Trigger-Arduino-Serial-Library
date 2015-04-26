@@ -205,6 +205,23 @@ unsigned short vol;
   WTSerial.write(txbuf, 12);
 }
 
+// **************************************************************
+void wavTrigger::samplerateOffset(int offset) {
+
+byte txbuf[8];
+unsigned short off;
+
+  txbuf[0] = 0xf0;
+  txbuf[1] = 0xaa;
+  txbuf[2] = 0x07;
+  txbuf[3] = CMD_SAMPLERATE_OFFSET;
+  off = (unsigned short)offset;
+  txbuf[4] = (byte)off;
+  txbuf[5] = (byte)(off >> 8);
+  txbuf[6] = 0x55;
+  WTSerial.write(txbuf, 7);
+}
+
 
 
 

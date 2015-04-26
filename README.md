@@ -16,14 +16,14 @@ This version currently only sends commands TO the WAV Trigger. I've not yet
 implemented any functions to receive info FROM the WAV Trigger.
 
 I make no attempt to throttle the amount of messages that are sent. If you send
-continuous volume commands at full speed, you risk overflowing the WAV Trigger's
-serial input buffer and/or causing clicks in the WAV Triggers audio output due to
-excessive serial interrupt processing stealing cycles from audio playback. If you
-are connecting a continuous controller that can change rapidly for volume control,
-you should use a timer to send changes only every 10 or more msecs. You can, of
-course, experiment with this. If you're only ever playing 1 or 2 tracks at a time,
-you'll likely be able to get away with sending volume changes more frequently
-than if you are playing 8 tracks at a time.
+continuous volume or sample-rate commands at full speed, you risk overflowing the
+WAV Trigger's serial input buffer and/or causing clicks in the WAV Triggers audio
+output due to excessive serial interrupt processing stealing cycles from audio
+playback. If you are connecting a continuous controller that can change rapidly
+for volume or sample-rate control, you should use a timer to send changes only
+every 10 or more msecs. You can, of course, experiment with this. If you're only
+ever playing 1 or 2 tracks at a time, you'll likely be able to get away with send-
+ing volume changes more frequently than if you are playing 8 tracks at a time.
 
 Beginning with WAV Trigger firmware v0.80 and higher, track fade and crossfade
 functions are supported, allowing you to achieve smooth volume ramps (up or down)
@@ -50,6 +50,13 @@ wavTrigger wTtrig;
   final output stage to the specified value. The range for gain is -70 to +4. If
   audio is playing, you will hear the result immediately. If audio is not playing,
   the new gain will be used the next time a track is started.
+
+**wTrig.samplerateOffset(int offset)** - this function immediately sets sample-
+  rate offset, or playback speed / pitch, of the main output mix. The range for
+  for the offset is -32767 to +32676, giving a speed range of 1/2x to 2x, or a
+  picth range of down one ocatave to up one octave. If audio is playing, you will
+  hear the result immediately. If audio is not playing, the new samplerate offset
+  will be used the next time a track is started.
 
 **wTrig.trackPlaySolo(int t)** - this function stops any and all tracks that are
   currently playing and starts track number **t** from the beginning.
