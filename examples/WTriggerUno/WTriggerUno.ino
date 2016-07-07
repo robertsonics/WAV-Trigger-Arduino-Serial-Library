@@ -51,26 +51,26 @@ int  gRateOffset = 0;         // WAV Trigger sample-rate offset
 
 // ****************************************************************************
 void setup() {
-  
+
   // Serial monitor
   Serial.begin(9600);
- 
+
   // Initialize the LED pin
   pinMode(LED,OUTPUT);
   digitalWrite(LED,gLedState);
 
   // WAV Trigger startup at 57600
   wTrig.start();
-  
+
   // If the Uno is powering the WAV Trigger, we should wait for the WAV Trigger
   //  to finish reset before trying to send commands.
   delay(1000);
-  
+
   // If we're not powering the WAV Trigger, send a stop-all command in case it
   //  was already playing tracks. If we are powering the WAV Trigger, it doesn't
   //  hurt to do this.
   wTrig.stopAllTracks();
-  
+
 }
 
 
@@ -80,18 +80,18 @@ void setup() {
 //  Each state will execute a new wavTrigger command.
 
 void loop() {
-  
+
 int i;
 
   // If time to do so, perform the next WAV Trigger task and then increment
-  //  the state machine variable 
+  //  the state machine variable
   if (gWTrigMetro.check() == 1) {
-      
+
       switch (gWTrigState) {
-  
-          // Demonstrates how to fade in a music track 
+
+          // Demonstrates how to fade in a music track
           case 0:
-              wTrig.masterGain(0);                  // Reset the master gain to 0dB                 
+              wTrig.masterGain(0);                  // Reset the master gain to 0dB
               wTrig.trackGain(2, -40);              // Preset Track 2 gain to -40dB
               wTrig.trackPlayPoly(2);               // Start Track 2
               wTrig.trackFade(2, 0, 2000, 0);       // Fade Track 2 to 0dB
@@ -101,7 +101,7 @@ int i;
           case 1:
               wTrig.trackCrossFade(2, 1, 0, 3000);  // Cross-fade Track 2 to Track 1
           break;
-                                 
+
           // Fade down music and start looping dialog
           case 2:
               wTrig.trackFade(1, -6, 500, 0);
@@ -119,13 +119,13 @@ int i;
               delay(500);
               wTrig.trackStop(5);                   // Stop Track 5
           break;
-          
+
           // Fade out and stop dialog
           case 4:
               wTrig.trackLoop(4, 0);                // Disable Track 4 looping
               wTrig.trackFade(4, -50, 5000, 1);     // Fade Track 4 to -50dB and stop
           break;
-          
+
           // This demonstrates playing musical instrument samples, with decay on
           //  release
           case 5:
@@ -140,7 +140,7 @@ int i;
               wTrig.trackFade(7, -50, 5000, 1);     // Fade Track 7 to -50dB and stop
               wTrig.trackFade(8, -50, 5000, 1);     // Fade Track 8 to -50dB and stop
           break;
-   
+
           // Demonstrates preloading tracks and starting them in sample-sync, and
           //  real-time samplerate control (pitch bending);
           case 6:
@@ -161,17 +161,17 @@ int i;
               delay(500);
               wTrig.stopAllTracks();                // Stop all
          break;
-         
-           
+
+
       } // switch
- 
+
       // Increment our state
       gWTrigState++;
       if (gWTrigState > 6)
           gWTrigState = 0;
-          
+
   } // if (gWTrigState.check() == 1)
- 
+
   // If time to do so, toggle the LED
   if (gLedMetro.check() == 1) {
       if (gLedState == 0) gLedState = 1;
@@ -182,4 +182,3 @@ int i;
   // Delay 30 msecs
   delay(30);
 }
-
