@@ -12,8 +12,6 @@
 
 #include "wavTrigger.h"
 
-#define LOGGING
-
 // **************************************************************
 void wavTrigger::start(void) {
   WTSerial.begin(57600);
