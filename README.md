@@ -3,17 +3,19 @@ WAV-Trigger-Arduino-Serial-Library
 
 WAV Trigger Serial Control Arduino Library
 
-This version of the library uses the AltSoftwareSerial library from PJRC by
-default, so you'll need to download and install that library as well. Be sure
-to include both library headers at the top of your sketch.
+Because the UNO's single serial port is used for programming, this library makes use
+of the AltSoftwareSerial library from PJRC by default. If you're using an UNO, you'll
+therefor want to download and install that library as well. Be sure to include both
+library headers at the top of your sketch. (See the example sketches)
 
 ```
 #include <AltSoftSerial.h>
 #include <wavTrigger.h>
 ```
 
-If you want to use a hardware serial port instead, you'll need to make one small
-change to the library's **wavTrigger.h file**. Near the top of the file, look for:
+However, if you're using an Arduino with at least 1 additional hardware serial
+port, you will not need AltSoftSerial. Instead, just make one small change to the
+library's **wavTrigger.h file**. Near the top of the file, look for:
 
 ```
 // ==================================================================
@@ -31,9 +33,6 @@ Comment out the `__WT_USER_ALTSOFTSERIAL__` line and uncomment the line correspo
 ing to the hardware port you want to use. If all the lines are commented out, the
 library will use Serial (the only hardware serial port on an Uno.)
 
-This version currently only sends commands TO the WAV Trigger. I've not yet
-implemented any functions to receive info FROM the WAV Trigger.
-
 I make no attempt to throttle the amount of messages that are sent. If you send
 continuous volume or sample-rate commands at full speed, you risk overflowing the
 WAV Trigger's serial input buffer and/or causing clicks in the WAV Triggers audio
@@ -44,26 +43,35 @@ every 10 or more msecs. You can, of course, experiment with this. If you're only
 ever playing 1 or 2 tracks at a time, you'll likely be able to get away with send-
 ing volume changes more frequently than if you are playing 8 tracks at a time.
 
-Beginning with WAV Trigger firmware v0.80 and higher, track fade and crossfade
-functions are supported, allowing you to achieve smooth volume ramps (up or down)
-and crossfades with a single serial command. Also beginning with v.080 and higher
-it is possible to pre-load multiple tracks and issue a single resume message that
-allows them start and play in sample locked synchronization.
+The library now includes two example sketches that demonstrate many of the library
+commands with a set of demo tracks which you can download from
 
-The library now includes an example sketch for the Arduino Uno that demonstrates
-many of the library commands with a set of demo tracks which you can download from
-www.robertsonics.com.
+http://robertsonics.com/2015/04/25/arduino-serial-control-tutorial/
 
+The basic sketch uses one-way communication to the WAV Trigger. The advanced sketch
+demonstrates bi-directional communication which allows you to schedule events based
+on when tracks finish.
+
+Some advanced functions depend on the later version of the WAV Trigger firmware.
+See the comments below.
 
 Usage:
 ======
 
-In all cases below, the range for t (track number) is 1 through 999;
+In all cases below, the range for t (track number) is 1 through 4096;
 
 wavTrigger wTtrig;
 
 **wTrig.start()** - you must call this method first to initialize the serial
   communications.
+
+**wTrig.getVersion(char *pDst, int len)** - this function will return 'len' bytes of
+  the WAV Trigger version string to the location specified by *pDst. The function
+  returns TRUE if successful, and FALSE if the string is not available. This
+  function requires bi-directional communication with the WAV Trigger.
+
+**wTrig.getNumTracks()** - Returns number of tracks on the WAV Trigger's microSD
+  card. This function requires bi-directional communication with the WAV Trigger.
 
 **wTrig.masterGain(int gain)** - this function immediately sets the gain of the
   final output stage to the specified value. The range for gain is -70 to +4. If
@@ -136,11 +144,24 @@ wavTrigger wTtrig;
   volume will transition smoothly from the current value to the target gain in the
   specified number of milliseconds. If the stopFlag is non-zero, the track will be
   stopped at the completion of the fade (for fade-outs.)
+  
+The following library functions are supported by WAV Trigger firmware v1.30 and above,
+and require bi-directional communication with the WAV Trigger
 
-**wTrig.trackCrossFade(int tFrom, int tTo, int gain, int time)** - this command
-  initiates a hardware crossfade from one track to another in a specified number of
-  milliseconds. The **From** track will be faded out and stopped, and the **To** track
-  will be started and faded in to the specified volume.
- 
+**wTrig.setReporting(bool enable)** - this function enables (true) or disables
+  (false) track reporting. When enabled, the WAV Trigger will send a message whenever
+  a track starts or ends, specifying the track number. Provided you call update()
+  periodically, the library will use these messages to maintain status of all tracks,
+  allowing you to query if particular tracks are playing or not.
+  
+**wTrig.update()** - this function should be called periodically when reporting is
+  enabled. Doing so will process any incoming serial messages and keep the track status
+  up to date.
+
+**wTrig.isTrackPlaying(int trk)** - If reporting has been enabled, this function can be
+  used to determine if a particular track is currently playing.
+
+**wTrig.flush()** - This function clears the WAV Trigger communication buffer and resets
+  the local track status info.
 
   
