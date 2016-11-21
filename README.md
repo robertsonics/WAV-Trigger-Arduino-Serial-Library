@@ -66,7 +66,7 @@ wavTrigger wTtrig;
   communications.
 
 **wTrig.getVersion(char *pDst, int len)** - this function will return **len** bytes of
-  the WAV Trigger version string to the location specified by ***pDst**. The function
+  the WAV Trigger version string to the location specified by **pDst**. The function
   returns TRUE if successful, and FALSE if the string is not available. This
   function requires bi-directional communication with the WAV Trigger.
 
