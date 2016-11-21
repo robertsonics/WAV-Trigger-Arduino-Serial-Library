@@ -165,5 +165,24 @@ sketch demonstrates the use of these functions.
 
 **wTrig.flush()** - This function clears the WAV Trigger communication buffer and resets
   the local track status info.
+  
+**wTrig.trackPlaySolo(int t, bool lock)** - this function stops any and all tracks that
+  are currently playing and starts track number **t** from the beginning. If **lock** is
+  TRUE, the track will not be subject to the WAV Trigger's voice stealing algorithm,
+  and will not be stopped if the max number of voices is reached.
+
+**wTrig.trackPlayPoly(int t, bool lock)** - this function starts track number **t** from
+  the beginning, blending it with any other tracks that are currently playing,
+  including potentially another copy of the same track. If **lock** is TRUE, the track will
+  not be subject to the WAV Trigger's voice stealing algorithm, and will not be stopped
+  if the max number of voices is reached.
+  
+**wTrig.trackLoad(int t, bool lock)** - this function loads track number **t** and pauses it
+  at the beginning of the track. Loading muiltiple tracks and then un-pausing them
+  all with resumeAllInSync() function allows for starting multiple tracks in sample
+  sync.  If **lock** is TRUE, the track will not be subject to the WAV Trigger's voice
+  stealing algorithm, and will not be stopped if the max number of voices is reached.
+  
+
 
   

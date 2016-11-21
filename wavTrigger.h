@@ -49,7 +49,7 @@
 #define CMD_TRACK_FADE					10
 #define CMD_RESUME_ALL_SYNC				11
 #define CMD_SAMPLERATE_OFFSET			12
-#define	CMD_CONTROL_TRACK_EX			13
+#define	CMD_TRACK_CONTROL_EX			13
 #define	CMD_SET_REPORTING				14
 
 #define TRK_PLAY_SOLO					0
@@ -116,7 +116,7 @@ public:
 	void trackPlayPoly(int trk);
 	void trackPlayPoly(int trk, bool lock);
 	void trackLoad(int trk);
-	void trackLoad(int trk, int bal, bool lock);
+	void trackLoad(int trk, bool lock);
 	void trackStop(int trk);
 	void trackPause(int trk);
 	void trackResume(int trk);
@@ -127,6 +127,7 @@ public:
 
 private:
 	void trackControl(int trk, int code);
+	void trackControl(int trk, int code, bool lock);
 
 #ifdef __WT_USE_ALTSOFTSERIAL__
 	AltSoftSerial WTSerial;

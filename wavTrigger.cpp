@@ -237,15 +237,33 @@ void wavTrigger::trackPlaySolo(int trk) {
 }
 
 // **************************************************************
+void wavTrigger::trackPlaySolo(int trk, bool lock) {
+  
+	trackControl(trk, TRK_PLAY_SOLO, lock);
+}
+
+// **************************************************************
 void wavTrigger::trackPlayPoly(int trk) {
   
 	trackControl(trk, TRK_PLAY_POLY);
 }
 
 // **************************************************************
+void wavTrigger::trackPlayPoly(int trk, bool lock) {
+  
+	trackControl(trk, TRK_PLAY_POLY, lock);
+}
+
+// **************************************************************
 void wavTrigger::trackLoad(int trk) {
   
 	trackControl(trk, TRK_LOAD);
+}
+
+// **************************************************************
+void wavTrigger::trackLoad(int trk, bool lock) {
+  
+	trackControl(trk, TRK_LOAD, lock);
 }
 
 // **************************************************************
@@ -289,6 +307,23 @@ uint8_t txbuf[8];
 	txbuf[6] = (uint8_t)(trk >> 8);
 	txbuf[7] = EOM;
 	WTSerial.write(txbuf, 8);
+}
+
+// **************************************************************
+void wavTrigger::trackControl(int trk, int code, bool lock) {
+  
+uint8_t txbuf[9];
+
+	txbuf[0] = SOM1;
+	txbuf[1] = SOM2;
+	txbuf[2] = 0x09;
+	txbuf[3] = CMD_TRACK_CONTROL_EX;
+	txbuf[4] = (uint8_t)code;
+	txbuf[5] = (uint8_t)trk;
+	txbuf[6] = (uint8_t)(trk >> 8);
+	txbuf[7] = lock;
+	txbuf[8] = EOM;
+	WTSerial.write(txbuf, 9);
 }
 
 // **************************************************************
