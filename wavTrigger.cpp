@@ -192,6 +192,20 @@ unsigned short vol;
 }
 
 // **************************************************************
+void wavTrigger::setAmpPwr(bool enable) {
+
+uint8_t txbuf[6];
+
+    txbuf[0] = SOM1;
+    txbuf[1] = SOM2;
+    txbuf[2] = 0x06;
+    txbuf[3] = CMD_AMP_POWER;
+    txbuf[4] = enable;
+    txbuf[5] = EOM;
+    WTSerial.write(txbuf, 6);
+}
+
+// **************************************************************
 void wavTrigger::setReporting(bool enable) {
 
 uint8_t txbuf[6];
