@@ -65,7 +65,7 @@ wavTrigger wTtrig;
 **wTrig.start()** - you must call this method first to initialize the serial
   communications.
 
-**wTrig.getVersion(char *pDst, int len)** - this function will return **len** bytes of
+**wTrig.getVersion(char \*pDst, int len)** - this function will return **len** bytes of
   the WAV Trigger version string to the location specified by **pDst**. The function
   returns TRUE if successful, and FALSE if the string is not available. This
   function requires bi-directional communication with the WAV Trigger.
@@ -77,6 +77,18 @@ wavTrigger wTtrig;
   final output stage to the specified value. The range for gain is -70 to +4. If
   audio is playing, you will hear the result immediately. If audio is not playing,
   the new gain will be used the next time a track is started.
+
+**wTrig.setAmpPwr(bool enable)** - this function enabled/disables the on-board
+  amplifier. If you’re planning to use the on-board amplifier, read this first.
+
+  <http://robertsonics.com/2015/05/16/update-on-wav-trigger-hardware-versions/>
+
+  Please consider using a supply voltage of no more than 9V, preferably less.
+  Playing loud audio with the on-board amp for extended periods can draw a lot of
+  current and the lower the input voltage, the less warm the 5V regulator will get.
+  This is especially important if you’re encasing the WAV Trigger in a small project box.
+  I personally use 6V wall mount adapters. Alternatively, you can power
+  the WAV Trigger with regulated 5V (5Vin) and bypass the on-board regulator completely.
 
 **wTrig.samplerateOffset(int offset)** - this function immediately sets sample-
   rate offset, or playback speed / pitch, of the main output mix. The range for
