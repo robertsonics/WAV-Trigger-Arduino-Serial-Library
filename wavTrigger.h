@@ -46,6 +46,7 @@
 #define CMD_STOP_ALL					4
 #define CMD_MASTER_VOLUME				5
 #define CMD_TRACK_VOLUME				8
+#define CMD_AMP_POWER					9
 #define CMD_TRACK_FADE					10
 #define CMD_RESUME_ALL_SYNC				11
 #define CMD_SAMPLERATE_OFFSET			12
@@ -105,6 +106,7 @@ public:
 	void update(void);
 	void flush(void);
 	void setReporting(bool enable);
+	void setAmpPwr(bool enable);
 	bool getVersion(char *pDst, int len);
 	int getNumTracks(void);
 	bool isTrackPlaying(int trk);
