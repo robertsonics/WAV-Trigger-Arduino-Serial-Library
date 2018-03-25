@@ -194,7 +194,10 @@ sketch demonstrates the use of these functions.
   all with resumeAllInSync() function allows for starting multiple tracks in sample
   sync.  If **lock** is TRUE, the track will not be subject to the WAV Trigger's voice
   stealing algorithm, and will not be stopped if the max number of voices is reached.
-  
 
+The following library functions are supported by WAV Trigger firmware v1.32 and above.
+
+**wTrig.setTriggerBank(int bank)** - this function immediately sets the Trigger Bank to
+  the specified value. Trigger Banks are numbered 1 to 32.
 
   

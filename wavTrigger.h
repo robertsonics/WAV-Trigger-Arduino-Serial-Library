@@ -52,6 +52,7 @@
 #define CMD_SAMPLERATE_OFFSET			12
 #define	CMD_TRACK_CONTROL_EX			13
 #define	CMD_SET_REPORTING				14
+#define CMD_SET_TRIGGER_BANK			15
 
 #define TRK_PLAY_SOLO					0
 #define TRK_PLAY_POLY					1
@@ -126,6 +127,7 @@ public:
 	void trackGain(int trk, int gain);
 	void trackFade(int trk, int gain, int time, bool stopFlag);
 	void samplerateOffset(int offset);
+	void setTriggerBank(int bank);
 
 private:
 	void trackControl(int trk, int code);
