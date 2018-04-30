@@ -60,7 +60,7 @@ Usage:
 
 In all cases below, the range for t (track number) is 1 through 4096;
 
-wavTrigger wTtrig;
+wavTrigger wTrig;
 
 **wTrig.start()** - you must call this method first to initialize the serial
   communications.
