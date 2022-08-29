@@ -10,10 +10,41 @@
 
 #include "wavTrigger.h"
 
+//**************************************************************************/
+/*!
+	@brief  Call this method to initialize the serial communications. Baud
+	rate 57600.
+*/
+/**************************************************************************/
+void wavTrigger::start(void) {
+
+uint8_t txbuf[5];
+
+	versionRcvd = false;
+	sysinfoRcvd = false;
+	WTSerial.begin(57600);
+	flush();
+
+	// Request version string
+	txbuf[0] = SOM1;
+	txbuf[1] = SOM2;
+	txbuf[2] = 0x05;
+	txbuf[3] = CMD_GET_VERSION;
+	txbuf[4] = EOM;
+	WTSerial.write(txbuf, 5);
+
+	// Request system info
+	txbuf[0] = SOM1;
+	txbuf[1] = SOM2;
+	txbuf[2] = 0x05;
+	txbuf[3] = CMD_GET_SYS_INFO;
+	txbuf[4] = EOM;
+	WTSerial.write(txbuf, 5);
+}
 
 //**************************************************************************/
 /*!
-    @brief  Call this method to initialize the serial communications.
+	@brief  Call this method to initialize the serial communications.
 	@param baud Serial baud rate, 57600 works well.
 	@param config Serial port address
 	@param rxPin RX Serial Pin
@@ -48,7 +79,7 @@ uint8_t txbuf[5];
 
 /**************************************************************************/
 /*!
-    @brief  Clears the WAV Trigger communication buffer and resets the 
+	@brief  Clears the WAV Trigger communication buffer and resets the 
 	local track status info.
 */
 /**************************************************************************/
@@ -70,7 +101,7 @@ uint8_t dat;
 
 /**************************************************************************/
 /*!
-    @brief  Should be called periodically when reporting is enabled. Doing 
+	@brief  Should be called periodically when reporting is enabled. Doing 
 	so will process any incoming serial messages and keep the track status 
 	up to date.
 */

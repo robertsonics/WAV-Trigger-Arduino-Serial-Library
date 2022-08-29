@@ -34,8 +34,8 @@
 // The following defines are used to control which serial class is
 //  used. Uncomment only the one you wish to use. If all of them are
 //  commented out, the library will use Hardware Serial
-#define __WT_USE_ALTSOFTSERIAL__
-//#define __WT_USE_SERIAL1__
+//#define __WT_USE_ALTSOFTSERIAL__
+#define __WT_USE_SERIAL1__
 //#define __WT_USE_SERIAL2__
 //#define __WT_USE_SERIAL3__
 // ==================================================================
@@ -104,6 +104,7 @@ public:
 	wavTrigger() {;}
 	~wavTrigger() {;}
 	void start(void);
+	void start(unsigned long baud, uint32_t config, int8_t rxPin, int8_t txPin);
 	void update(void);
 	void flush(void);
 	void setReporting(bool enable);
