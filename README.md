@@ -81,7 +81,7 @@ wavTrigger wTtrig;
 **wTrig.setAmpPwr(bool enable)** - this function enabled/disables the on-board
   amplifier. If you’re planning to use the on-board amplifier, read this first.
 
-  <http://robertsonics.com/2015/05/16/update-on-wav-trigger-hardware-versions/>
+  <http://https://robertsonics.com/blog/2015/05/16/update-on-wav-trigger-hardware-versions>
 
   Please consider using a supply voltage of no more than 9V, preferably less.
   Playing loud audio with the on-board amp for extended periods can draw a lot of
