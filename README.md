@@ -46,7 +46,7 @@ ing volume changes more frequently than if you are playing 8 tracks at a time.
 The library now includes two example sketches that demonstrate many of the library
 commands with a set of demo tracks which you can download from
 
-http://robertsonics.com/2015/04/25/arduino-serial-control-tutorial/
+[https://www.robertsonics.com/blog/2015/04/25/arduino-serial-control-tutorial/]
 
 The basic sketch uses one-way communication to the WAV Trigger. The advanced sketch
 demonstrates bi-directional communication which allows you to schedule events based
@@ -81,7 +81,7 @@ wavTrigger wTtrig;
 **wTrig.setAmpPwr(bool enable)** - this function enabled/disables the on-board
   amplifier. If you’re planning to use the on-board amplifier, read this first.
 
-  <http://https://robertsonics.com/blog/2015/05/16/update-on-wav-trigger-hardware-versions>
+  <https://robertsonics.com/blog/2015/05/16/update-on-wav-trigger-hardware-versions>
 
   Please consider using a supply voltage of no more than 9V, preferably less.
   Playing loud audio with the on-board amp for extended periods can draw a lot of
