@@ -228,8 +228,6 @@ int i;
 		return false;
 	}
 	for (i = 0; i < (VERSION_STRING_LEN - 1); i++) {
-		if (i >= (len - 1))
-			break;
 		pDst[i] = version[i];
 	}
 	return true;
