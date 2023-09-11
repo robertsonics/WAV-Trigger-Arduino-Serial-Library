@@ -92,7 +92,7 @@ void setup() {
   
   // If bi-directional communication is wired up, then we should by now be able
   //  to fetch the version string and number of tracks on the SD card.
-  if (wTrig.getVersion(gWTrigVersion, VERSION_STRING_LEN)) {
+  if (wTrig.getVersion(gWTrigVersion)) {
       Serial.print(gWTrigVersion);
       Serial.print("\n");
       gNumTracks = wTrig.getNumTracks();

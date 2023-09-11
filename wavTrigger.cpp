@@ -219,7 +219,7 @@ uint8_t txbuf[6];
 }
 
 // **************************************************************
-bool wavTrigger::getVersion(char *pDst, int len) {
+bool wavTrigger::getVersion(char *pDst) {
 
 int i;
 
