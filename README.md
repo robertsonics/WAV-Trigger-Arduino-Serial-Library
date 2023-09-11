@@ -5,13 +5,7 @@ WAV Trigger Serial Control Arduino Library
 
 Because the UNO's single serial port is used for programming, this library makes use
 of the AltSoftwareSerial library from PJRC by default. If you're using an UNO, you'll
-therefore want to download and install that library as well. Be sure to include both
-library headers at the top of your sketch. (See the example sketches)
-
-```
-#include <AltSoftSerial.h>
-#include <wavTrigger.h>
-```
+therefore want to download and install that library as well.
 
 However, if you're using an Arduino with at least one additional hardware serial
 port, you will not need AltSoftSerial. Instead, just make one small change to the

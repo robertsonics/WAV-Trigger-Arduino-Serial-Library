@@ -78,7 +78,7 @@
 
 
 #ifdef __WT_USE_ALTSOFTSERIAL__
-#include "../AltSoftSerial/AltSoftSerial.h"
+#include <AltSoftSerial.h>
 #else
 #include <HardwareSerial.h>
 #ifdef __WT_USE_SERIAL1__
