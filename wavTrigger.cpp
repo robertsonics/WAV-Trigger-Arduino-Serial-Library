@@ -232,7 +232,6 @@ int i;
 			break;
 		pDst[i] = version[i];
 	}
-	pDst[++i] = 0;
 	return true;
 }
 
