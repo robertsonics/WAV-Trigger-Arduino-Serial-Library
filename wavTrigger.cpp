@@ -433,5 +433,3 @@ uint8_t txbuf[6];
 	txbuf[5] = EOM;
 	WTSerial.write(txbuf, 6);
 }
-
-

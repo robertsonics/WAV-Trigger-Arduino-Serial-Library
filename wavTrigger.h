@@ -80,7 +80,7 @@
 #ifdef __WT_USE_ALTSOFTSERIAL__
 #include <AltSoftSerial.h>
 #else
-#if defined(__SAM3X8E__)
+#ifdef __SAM3X8E__
 #include <Arduino.h>
 #else
 #include <HardwareSerial.h>
