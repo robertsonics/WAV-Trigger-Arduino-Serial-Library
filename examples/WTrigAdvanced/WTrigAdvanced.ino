@@ -43,7 +43,6 @@
 //    10 to 20 seconds long and have no silence at the start of the file.
 
 #include <Metro.h>
-#include <AltSoftSerial.h>    // Arduino build environment requires this
 #include <wavTrigger.h>
 
 #define LED 13                // our LED
@@ -93,7 +92,7 @@ void setup() {
   
   // If bi-directional communication is wired up, then we should by now be able
   //  to fetch the version string and number of tracks on the SD card.
-  if (wTrig.getVersion(gWTrigVersion, VERSION_STRING_LEN)) {
+  if (wTrig.getVersion(gWTrigVersion)) {
       Serial.print(gWTrigVersion);
       Serial.print("\n");
       gNumTracks = wTrig.getNumTracks();

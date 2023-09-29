@@ -5,13 +5,7 @@ WAV Trigger Serial Control Arduino Library
 
 Because the UNO's single serial port is used for programming, this library makes use
 of the AltSoftwareSerial library from PJRC by default. If you're using an UNO, you'll
-therefore want to download and install that library as well. Be sure to include both
-library headers at the top of your sketch. (See the example sketches)
-
-```
-#include <AltSoftSerial.h>
-#include <wavTrigger.h>
-```
+therefore want to download and install that library as well.
 
 However, if you're using an Arduino with at least one additional hardware serial
 port, you will not need AltSoftSerial. Instead, just make one small change to the
@@ -58,14 +52,14 @@ See the comments below.
 Usage:
 ======
 
-In all cases below, the range for t (track number) is 1 through 4096;
+In all cases below, the range for trk (track number) is 1 through 4096;
 
 wavTrigger wTtrig;
 
 **wTrig.start()** - you must call this method first to initialize the serial
   communications.
 
-**wTrig.getVersion(char \*pDst, int len)** - this function will return **len** bytes of
+**wTrig.getVersion(char \*pDst)** - this function will return **VERSION_STRING_LEN** bytes of
   the WAV Trigger version string to the location specified by **pDst**. The function
   returns TRUE if successful, and FALSE if the string is not available. This
   function requires bi-directional communication with the WAV Trigger.
@@ -97,32 +91,32 @@ wavTrigger wTtrig;
   hear the result immediately. If audio is not playing, the new sample-rate offset
   will be used the next time a track is started.
 
-**wTrig.trackPlaySolo(int t)** - this function stops any and all tracks that are
+**wTrig.trackPlaySolo(int trk)** - this function stops any and all tracks that are
   currently playing and starts track number **t** from the beginning.
 
-**wTrig.trackPlayPoly(int t)** - this function starts track number **t** from the
+**wTrig.trackPlayPoly(int trk)** - this function starts track number **t** from the
   beginning, blending it with any other tracks that are currently playing,
   including potentially another copy of the same track.
   
-**wTrig.trackLoad(int t)** - this function loads track number **t** and pauses it
+**wTrig.trackLoad(int trk)** - this function loads track number **t** and pauses it
   at the beginning of the track. Loading muiltiple tracks and then un-pausing them
   all with resumeAllInSync() function below allows for starting multiple tracks in
   sample sync.
   
-**wTrig.trackStop(int t)** - this function stops track number **t** if it's currently
+**wTrig.trackStop(int trk)** - this function stops track number **t** if it's currently
   playing. If track t is not playing, this function does nothing. No other
   tracks are affected.
   
-**wTrig.trackPause(int t)** - this function pauses track number **t** if it's currently
+**wTrig.trackPause(int trk)** - this function pauses track number **t** if it's currently
   playing. If track t is not playing, this function does nothing. Keep in mind
   that a paused track is still using one of the 8 voice slots. A voice allocated
   to playing a track becomes free only when that sound is stopped or the track
   reaches the end of the file (and is not looping).
   
-**wTrig.trackResume(int t)** - this function resumes track number **t** if it's currently
+**wTrig.trackResume(int trk)** - this function resumes track number **t** if it's currently
   paused. If track number **t** is not paused, this function does nothing.
   
-**wTrig.trackLoop(int t, bool enable)** - this function enables (true) or disables
+**wTrig.trackLoop(int trk, bool enable)** - this function enables (true) or disables
   (false) the loop flag for track **t**. This command does not actually start a track,
   only determines how it behaves once it is playing and reaches the end. If the
   loop flag is set, that track will loop continuously until it's stopped, in which
@@ -130,7 +124,7 @@ wavTrigger wTtrig;
   flag is cleared, in which case it will stop when it reaches the end of the track.
   This command may be used either before a track is started or while it's playing.
   
-**wTrig.trackGain(int t, int gain)** - this function immediately sets the gain of
+**wTrig.trackGain(int trk, int gain)** - this function immediately sets the gain of
   track **t** to the specified value. The range for gain is -70 to +10. A value of
   0 (no gain) plays the track at the nominal value in the wav file. This is the
   default gain for every track until changed. A value of -70 is completely
@@ -151,7 +145,7 @@ wavTrigger wTtrig;
   audio buffer. Any tracks that were loaded using the trackLoad() function will start
   and remain sample locked (in sample sync) with one another.
 
-**wTrig.trackFade(int t, int gain, int time, bool stopFlag)** - this command initiates
+**wTrig.trackFade(int trk, int gain, int time, bool stopFlag)** - this command initiates
   a hardware volume fade on track number **t** if it is currently playing. The track
   volume will transition smoothly from the current value to the target gain in the
   specified number of milliseconds. If the stopFlag is non-zero, the track will be
@@ -178,18 +172,18 @@ sketch demonstrates the use of these functions.
 **wTrig.flush()** - This function clears the WAV Trigger communication buffer and resets
   the local track status info.
   
-**wTrig.trackPlaySolo(int t, bool lock)** - this function stops any and all tracks that
+**wTrig.trackPlaySolo(int trk, bool lock)** - this function stops any and all tracks that
   are currently playing and starts track number **t** from the beginning. If **lock** is
   TRUE, the track will not be subject to the WAV Trigger's voice stealing algorithm,
   and will not be stopped if the max number of voices is reached.
 
-**wTrig.trackPlayPoly(int t, bool lock)** - this function starts track number **t** from
+**wTrig.trackPlayPoly(int trk, bool lock)** - this function starts track number **t** from
   the beginning, blending it with any other tracks that are currently playing,
   including potentially another copy of the same track. If **lock** is TRUE, the track will
   not be subject to the WAV Trigger's voice stealing algorithm, and will not be stopped
   if the max number of voices is reached.
   
-**wTrig.trackLoad(int t, bool lock)** - this function loads track number **t** and pauses it
+**wTrig.trackLoad(int trk, bool lock)** - this function loads track number **t** and pauses it
   at the beginning of the track. Loading muiltiple tracks and then un-pausing them
   all with resumeAllInSync() function allows for starting multiple tracks in sample
   sync.  If **lock** is TRUE, the track will not be subject to the WAV Trigger's voice

@@ -78,9 +78,13 @@
 
 
 #ifdef __WT_USE_ALTSOFTSERIAL__
-#include "../AltSoftSerial/AltSoftSerial.h"
+#include <AltSoftSerial.h>
+#else
+#ifdef __SAM3X8E__
+#include <Arduino.h>
 #else
 #include <HardwareSerial.h>
+#endif
 #ifdef __WT_USE_SERIAL1__
 #define WTSerial Serial1
 #define __WT_SERIAL_ASSIGNED__
@@ -108,7 +112,7 @@ public:
 	void flush(void);
 	void setReporting(bool enable);
 	void setAmpPwr(bool enable);
-	bool getVersion(char *pDst, int len);
+	bool getVersion(char *pDst);
 	int getNumTracks(void);
 	bool isTrackPlaying(int trk);
 	void masterGain(int gain);

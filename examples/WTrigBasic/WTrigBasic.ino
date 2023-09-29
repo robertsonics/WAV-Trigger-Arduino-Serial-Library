@@ -41,7 +41,6 @@
 //    to 20 seconds long and have no silence at the start of the file.
 
 #include <Metro.h>
-#include <AltSoftSerial.h>    // Arduino build environment requires this
 #include <wavTrigger.h>
 
 #define LED 13                // our LED

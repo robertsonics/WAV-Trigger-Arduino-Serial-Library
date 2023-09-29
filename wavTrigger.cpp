@@ -42,7 +42,6 @@ uint8_t txbuf[5];
 void wavTrigger::flush(void) {
 
 int i;
-uint8_t dat;
 
 	rxCount = 0;
 	rxLen = 0;
@@ -51,7 +50,7 @@ uint8_t dat;
 	  voiceTable[i] = 0xffff;
 	}
 	while(WTSerial.available())
-		dat = WTSerial.read();
+		WTSerial.read();
 }
 
 
@@ -168,7 +167,7 @@ bool fResult = false;
 
 	update();
 	for (i = 0; i < MAX_NUM_VOICES; i++) {
-		if (voiceTable[i] == trk)
+		if (voiceTable[i] == (uint16_t)trk)
 			fResult = true;
 	}
 	return fResult;
@@ -220,7 +219,7 @@ uint8_t txbuf[6];
 }
 
 // **************************************************************
-bool wavTrigger::getVersion(char *pDst, int len) {
+bool wavTrigger::getVersion(char *pDst) {
 
 int i;
 
@@ -229,11 +228,8 @@ int i;
 		return false;
 	}
 	for (i = 0; i < (VERSION_STRING_LEN - 1); i++) {
-		if (i >= (len - 1))
-			break;
 		pDst[i] = version[i];
 	}
-	pDst[++i] = 0;
 	return true;
 }
 
@@ -437,5 +433,3 @@ uint8_t txbuf[6];
 	txbuf[5] = EOM;
 	WTSerial.write(txbuf, 6);
 }
-
-
